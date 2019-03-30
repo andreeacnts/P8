@@ -1,6 +1,7 @@
 # Snakes with python
 
-This is a simple snakes implementation using python outlined in [1] with help from [2]. The example file implements the example outlined in [2]. Python library dependencies are `numpy`, `scipy`, and `matplotlib`. 
+This is a simple snakes implementation using python outlined in [1] with help from [2]. 
+The example file implements the example outlined in [2]. Python library dependencies are `numpy`, `scipy`, and `matplotlib`. 
 
 After cloning the repository, you should just be able to run
 

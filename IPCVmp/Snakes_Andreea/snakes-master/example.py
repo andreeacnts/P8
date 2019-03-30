@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import snake as sn
+import skimage.filter as filt
 
 img = np.load('./img.npy')
 

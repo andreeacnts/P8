@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import snake as sn
 
+
 x,y = np.mgrid[-4:4:256j, -4:4:256j]
 rad = (x**2 + y**2)**0.5
 tht = np.arctan2(y, x)
