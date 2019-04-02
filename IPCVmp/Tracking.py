@@ -4,7 +4,7 @@ import numpy as np
 
 faceDetection = cv2.CascadeClassifier('D:\opencv\sources\data\haarcascades\haarcascade_frontalface_default.xml')
    
-VideoFeed = cv2.VideoCapture(1)
+VideoFeed = cv2.VideoCapture(0) #Value can be either 0 or 1
 
 while 1:
     ret, img = VideoFeed.read()
