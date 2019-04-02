@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
 
-filename = 'image-test'
+filename = 'lips'
 
 img = Image.open( filename + '.png' )
 data = np.array( img, dtype='uint8' )
