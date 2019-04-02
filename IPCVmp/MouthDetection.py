@@ -27,11 +27,11 @@ while True:
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in smile:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 3)
+        cv2.rectangle(gray, (x, y), (x+w, y+h), (255, 0, 0), 3)
         roi_gray = gray[y:y+h, x:x+w]
-        roi_color = frame[y:y+h, x:x+w]
-        cv2.putText(frame,'SMILEEEEEEEEE',(x, y), font, 2,(255,0,0),5)
-        cv2.putText(frame,'Number of Faces : ' + str(len(smile)),(40, 40), font, 1,(255,0,0),2)      
+        #roi_color = frame[y:y+h, x:x+w]
+        cv2.putText(gray,'SMILEEEEEEEEE',(x, y), font, 2,(255,0,0),5)
+        cv2.putText(gray,'Number of Faces : ' + str(len(smile)),(40, 40), font, 1,(255,0,0),2)      
     """
 
     for (sx, sy, sw, sh) in smile:
@@ -40,7 +40,7 @@ while True:
     # Display the resulting frame
         
     """
-    cv2.imshow('Video', frame)
+    cv2.imshow('Video', gray)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
