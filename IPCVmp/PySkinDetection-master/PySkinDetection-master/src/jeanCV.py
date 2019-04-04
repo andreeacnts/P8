@@ -43,7 +43,7 @@ class skinDetector(object):
 
 #================================================================================================================================
 	#Function that applies Watershed and morphological operations on the thresholded image
-	def __region_based_segmentation(self):
+	def __region_based_segmentation(self):.<.
 		#morphological operations
 		image_foreground = cv2.erode(self.binary_mask_image,None,iterations = 3)     	#remove noise
 		dilated_binary_image = cv2.dilate(self.binary_mask_image,None,iterations = 3)   #The background region is reduced a little because of the dilate operation
