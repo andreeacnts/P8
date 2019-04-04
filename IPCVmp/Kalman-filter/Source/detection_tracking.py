@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-face_cascade = cv2.CascadeClassifier('D:/opencv/sources/data/haarcascades/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('D:/opencv/sources/data/haarcascades/haarcascade_smile.xml')
 
 
 def help_message():
