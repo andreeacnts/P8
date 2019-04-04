@@ -1,4 +1,7 @@
 import cv2
+import os
+import sys
+import matplotlib.pyplot as plt
 import numpy as np
 
 #cascPath = "D:/opencv/sources/data/haarcascades/haarcascade_frontalface_default.xml"
@@ -11,7 +14,6 @@ smileCascade = cv2.CascadeClassifier(smilePath)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 video_capture = cv2.VideoCapture(0)
-
 
 while True:
     # Capture frame-by-frame
@@ -33,6 +35,7 @@ while True:
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = frame[y:y+h, x:x+w]
         cv2.putText(frame,'SMILEEEEEEEEE',(x, y), font, 2,(255,0,0),5)
+        cv2.putText(frame,'Number of Faces : ' + str(len(smile)),(40, 40), font, 1,(255,0,0),2)      
     """
 
     for (sx, sy, sw, sh) in smile:
@@ -50,9 +53,14 @@ cv2.destroyAllWindows()
 
 with open("coords.txt","w+") as file:
     for idx in range(len(frame)):
-        frameCount = 0
-        file.write("Box {0}: ({1},{2}), ({3},{4}), ({5},{6}), ({7},{8})\n".format(idx,x,y,x+w,y,x+w,y+h,x,y+h))
-        frameCount += 1
+        frameCounter = 0
+        x, y, w, h = cv2.rectangle(frame[idx])
+        #frame[y:y+h, x:x+w] = 0
+        pt = (0, x + w/2.0, y + h/2.0)
+        file.write("%d,%d,%d\n" % pt)
+        frameCounter += 1
+        cv2.drawContours(frame, frame, idx, (255, 255, 255), -1)
+        r = float(cv2.countNonZero(frame[y:y+h, x:x+w])) / (w * h)
 """
 
 
