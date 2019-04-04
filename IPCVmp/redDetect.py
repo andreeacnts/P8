@@ -7,8 +7,12 @@ Created on Thu Apr  4 14:53:02 2019
 
 import cv2
 import numpy as np
-
+    
 cap = cv2.VideoCapture(0)
+frameCounter = 0
+pos = 0
+frameCounter = 0
+
 
 while True:
     _, frame = cap.read()
@@ -23,9 +27,19 @@ while True:
     for i in range(len(conts)):
         x,y,h,w = cv2.boundingRect(conts[i])
         cv2.rectangle(frame,(x,y),(x+w, y+h),(0,0,225),2)
+        pos = cv2.rectangle[1]
         
+       
+    pt = (frameCounter, pos)
+    frameCounter= frameCounter+1
+    f = open("redOutpuut1.txt", "w") 
+    f.write( "%d,%d,%d" % pt)
+    f.close()
+
+
     cv2.imshow("Frame", frame)
     cv2.imshow("Red", red)
     key = cv2.waitKey(1)
     if key == 27: 
         break
+
