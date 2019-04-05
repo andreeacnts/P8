@@ -10,8 +10,10 @@ smilePath = "D:/opencv/sources/data/haarcascades/haarcascade_smile.xml"
 smileCascade = cv2.CascadeClassifier(smilePath)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-video_capture = cv2.VideoCapture('little-girl-laughing12.mp4')
+video_capture = cv2.VideoCapture(0)
 
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
 
 while True:
     # Capture frame-by-frame
@@ -28,7 +30,7 @@ while True:
     )
 
     # Draw a rectangle around the faces
-    for (x, y, w, h) in smile:
+    for (x, y, w, h) in smile: #w = width, h = height
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 3)
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = frame[y:y+h, x:x+w]

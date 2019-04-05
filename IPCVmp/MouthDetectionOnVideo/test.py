@@ -51,6 +51,7 @@ cv2.destroyAllWindows()
 with open("coords.txt","w+") as file:
     for idx in range(len(frame)):
         frameCount = 0
+        x, y, w, h = smile
         file.write("Box {0}: ({1},{2}), ({3},{4}), ({5},{6}), ({7},{8})\n".format(idx,x,y,x+w,y,x+w,y+h,x,y+h))
         frameCount += 1
 """
