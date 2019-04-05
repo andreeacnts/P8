@@ -1,6 +1,5 @@
 import cv2 
 import pandas as pd 
-from datetime import datetime
 
 #path to opencv built in haar cascades for smile and face recognition
 smilePath = "D:/opencv/sources/data/haarcascades/haarcascade_smile.xml"
