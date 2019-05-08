@@ -14,10 +14,10 @@ endys=[]
 
 
 #capture video from file
-#cap = cv2.VideoCapture('video11.mp4')
+cap = cv2.VideoCapture('minute.mp4')
 #capture video via webcam
 #might have to change value 0 to 1
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 
 while True:
     ret, img = cap.read()
