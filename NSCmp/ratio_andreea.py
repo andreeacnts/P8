@@ -1,14 +1,17 @@
 import cv2 
 import pandas as pd 
-from datetime import datetime
 
 smilePath = "D:/opencv/sources/data/haarcascades/haarcascade_smile.xml"
 facePath = "D:/opencv/sources/data/haarcascades/haarcascade_frontalface_default.xml"
 face_classifier = cv2.CascadeClassifier(facePath) 
 smile_classifier = cv2.CascadeClassifier(smilePath)
 
-times=[]
 smile_ratios=[]
+startxs=[]
+endxs=[]
+startys=[]
+endys=[]
+
 
 #capture video from file
 #cap = cv2.VideoCapture('video11.mp4')
@@ -30,17 +33,28 @@ while True:
                                                   minSize=(25, 25))
         for (sx, sy, sw, sh) in smile:
             cv2.rectangle(roi_img, (sx, sy), (sx + sw, sy + sh), (0, 255, 0), 1)
-            sm_ratio = str(round(sw / sx, 3))
+            startx = str(round(sx))
+            endx = str(round(sw))
+            starty = str(round(sy))
+            endy = str (round(sh))
+            sm_ratio = str(round(((sw / sx)+(sh / sy)) / 2, 3))
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
-            if float(sm_ratio)>1.8:
+            if float(sm_ratio)>0:
                 smile_ratios.append(float(sm_ratio))
-                times.append(datetime.now())
+                startxs.append(startx)
+                endxs.append(endx)
+                startys.append(starty)
+                endys.append(endy)
+                #sh=[]
+                #sy=[]
     cv2.imshow('Smile Detector', img)
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
-ds={'smile_ratio':smile_ratios,'times':times}
+#ds={'smile_ratio':smile_ratios,'times':times,'sw':sw,'sx':sx,'sh':sh,'sy':sy}
+#print(len(smile_ratios),len(times),len(sw), len(sx))
+ds={'smile_ratio':smile_ratios, 'startx':startxs, 'endx':endxs, 'starty':startys, 'endy':endys}
 df=pd.DataFrame(ds)
 df.to_csv('smile_records.csv')
 cap.release()
