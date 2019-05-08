@@ -1,6 +1,8 @@
 import cv2 
 import pandas as pd 
+import time
 
+start = time.time()
 #path to opencv built in haar cascades for smile and face recognition
 smilePath = "D:/opencv/sources/data/haarcascades/haarcascade_smile.xml"
 facePath = "D:/opencv/sources/data/haarcascades/haarcascade_frontalface_default.xml"
@@ -47,7 +49,7 @@ while True:
     if k == 27:
         break
 
-
-
+    end = time.time()
+    print(end -start)
 cap.release()
 cv2.destroyAllWindows()
