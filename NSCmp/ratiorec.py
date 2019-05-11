@@ -1,13 +1,12 @@
 import cv2 
 import pandas as pd 
-import numpy as np
+
 
 smilePath = "D:/opencv/sources/data/haarcascades/haarcascade_smile.xml"
 facePath = "D:/opencv/sources/data/haarcascades/haarcascade_frontalface_default.xml"
 face_classifier = cv2.CascadeClassifier(facePath) 
 smile_classifier = cv2.CascadeClassifier(smilePath)
 
-smile_ratios=[]
 startxs=[]
 endxs=[]
 startys=[]
@@ -15,10 +14,10 @@ endys=[]
 
 
 #capture video from file
-cap = cv2.VideoCapture('video11.mp4')
+#cap = cv2.VideoCapture('video11.mp4')
 #capture video via webcam
 #might have to change value 0 to 1
-#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 while True:
     ret, img = cap.read()
@@ -38,32 +37,42 @@ while True:
             endx = str(round(sw))
             starty = str(round(sy))
             endy = str (round(sh))
-            sm_ratio = str(round(((sw / sx)+(sh / sy)) / 2, 3))
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
-            if float(sm_ratio)>1:
-                smile_ratios.append(float(sm_ratio))
-                startxs.append(startx)
-                endxs.append(endx)
-                startys.append(starty)
-                endys.append(endy)
-                #sh=[]
-                #sy=[]
+            cv2.putText(img, 'Smile meter : ', (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
+
+            startxs.append(startx)
+            endxs.append(endx)
+            startys.append(starty)
+            endys.append(endy)
+
     cv2.imshow('Smile Detector', img)
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
-
-
-#ds={'smile_ratio':smile_ratios,'times':times,'sw':sw,'sx':sx,'sh':sh,'sy':sy}
-#print(len(smile_ratios),len(times),len(sw), len(sx))
-ds={'smile_ratio':smile_ratios, 'startx':startxs, 'endx':endxs, 'starty':startys, 'endy':endys}
+ds={'startx':startxs, 'endx':endxs, 'starty':startys, 'endy':endys}
 df=pd.DataFrame(ds)
 df.to_csv('dataaq.csv')
-
-
-
-
-
 cap.release()
 cv2.destroyAllWindows()
+
+#Naive version to calculate ratios
+
+df1 = pd.read_csv(r"C:\Users\Bruger\Desktop\P8\NSCmp\dataaq.csv")
+
+smile_ratios = []
+for i in range(0, len(df)):
+    smile_ratio = (df1.iloc[i]['endx'] / df1.iloc[i]['startx']) + (df1.iloc[i]['endy'] / df1.iloc[i]['starty']) / 2
+    smile_ratios.append(smile_ratio)
+
+r={'smile_ratio':smile_ratios}
+df1=pd.DataFrame(r)
+df1.to_csv('dataaq.csv')
+
+
+#Vectorised pandas to calculate ratios
+
+#df2 = pd.read_csv(r"C:\Users\Bruger\Desktop\P8\NSCmp\dataaq.csv")
+
+
+#df2['new_column1'] = ((df1['endx'] / df1['startx']) + (df1['endy'] / df1['starty'])) / 2
+#df2.to_csv('dataaq.csv')
