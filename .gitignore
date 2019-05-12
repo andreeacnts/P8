@@ -30,3 +30,5 @@ WLSNet_pytorch-master/WLSNet_pytorch-master/\.idea/modules\.xml
 WLSNet_pytorch-master/WLSNet_pytorch-master/\.idea/vcs\.xml
 
 IPCVmp/RedTracking/redDetect\.py
+
+NSCmp/smile_ratio\.py
