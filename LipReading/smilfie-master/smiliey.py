@@ -89,6 +89,6 @@ fps.stop()
 
 ds = {'x': xss, 'y': yss }
 df = pd.DataFrame(ds)
-df.to_csv('capital10.csv')
+df.to_csv('happened10.csv')
 cv2.destroyAllWindows()
 vs.stop()
