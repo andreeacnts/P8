@@ -17,9 +17,8 @@ cap = cv2.VideoCapture(r"movie_resized.mp4")
 
 while True:
     ret, img = cap.read()
-    img = np.array(img, dtype=np.uint8)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    gray = cv2.GaussianBlur(gray, (21, 21), 0)
+    #gray = cv2.GaussianBlur(gray, (21, 21), 0)
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     
     for (x, y, w, h) in faces:

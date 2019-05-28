@@ -11,7 +11,7 @@ smile_classifier = cv2.CascadeClassifier(smilePath)
 
 
 #capture video from file
-cap = cv2.VideoCapture(r"movie_resized.mp4")
+cap = cv2.VideoCapture(r"C:\Users\Bruger\Desktop\P8\LipReading\movie_resized.mp4")
 
 #capture video via webcam
 #might have to change value 0 to 1
@@ -22,7 +22,6 @@ cap = cv2.VideoCapture(r"movie_resized.mp4")
 #clip_resized.write_videofile("movie_resized.mp4")
 while True:
     ret, img = cap.read()
-    img = np.array(img, dtype=np.uint8)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
@@ -42,12 +41,14 @@ while True:
             cv2.rectangle(roi_img, (sx, sy), (sx + sw, sy + sh), (0, 255, 0), 1)
 
             #define width/height ratio in order to detect a smile
-            sm_ratio = str(round(sw / (sx+2), 3)) 
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
+            #sm_ratio = str(round(sw / (sx+2), 3)) 
+            #font = cv2.FONT_HERSHEY_SIMPLEX
+            #cv2.putText(img, 'Smile meter : ' + sm_ratio, (10, 50), font, 1, (200, 255, 155), 2, cv2.LINE_AA)
 
             #print x,y coordinates for face and smile bounding box
-            print(x,y,sx,sy)
+            width = sx + sx+sw
+            height = sy + sy+sh
+            print("w=", width, ";", "h=", height)
 
     cv2.imshow('Smile Detector', img)
     k = cv2.waitKey(30) & 0xff
